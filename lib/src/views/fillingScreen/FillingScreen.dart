@@ -12,66 +12,59 @@ class FillingScreen extends StatefulWidget {
 class _FillingScreenState extends State<FillingScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FillingScreenBloc(),
-      child: BlocConsumer<FillingScreenBloc, FillingScreenState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            FillingScreenBloc bloc =
-                BlocProvider.of<FillingScreenBloc>(context);
-            return Scaffold(
-              resizeToAvoidBottomInset: false,
-              appBar: AppBar(
-                backgroundColor: Colors.blue,
-                title: const Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "CV-ez",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontFamily: "Outfit"),
+    return BlocBuilder<FillingScreenBloc, FillingScreenState>(
+        builder: (context, state) {
+      FillingScreenBloc bloc = BlocProvider.of<FillingScreenBloc>(context);
+      return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          title: const Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              "CV-ez",
+              style: TextStyle(
+                  color: Colors.white, fontSize: 30, fontFamily: "Outfit"),
+            ),
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(
+                Icons.menu,
+                size: 25,
+              ),
+              onPressed: () {},
+            )
+          ],
+        ),
+        body: Column(
+          children: [
+            _buildIconRow(bloc),
+            _buildPageView(bloc),
+            InkWell(
+              onTap: (() {
+                bloc.add(NextPage());
+              }),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(5)),
+                  padding: const EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Text(
+                      "Next step",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
                   ),
                 ),
-                actions: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.menu,
-                      size: 25,
-                    ),
-                    onPressed: () {},
-                  )
-                ],
               ),
-              body: Column(
-                children: [
-                  _buildIconRow(bloc),
-                  _buildPageView(bloc),
-                  InkWell(
-                    onTap: (() {
-                      bloc.add(NextPage());
-                    }),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(5)),
-                        padding: const EdgeInsets.all(10.0),
-                        child: Center(
-                          child: Text(
-                            "Next step",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }),
-    );
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   Expanded _buildPageView(FillingScreenBloc bloc) {

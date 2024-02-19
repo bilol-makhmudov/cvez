@@ -1,3 +1,4 @@
+import 'package:cv_ez/src/blocs/bloc_barrel.dart';
 import 'package:cv_ez/src/views/fillingScreen/FillingScreen.dart';
 import 'package:cv_ez/src/views/homeScreen/HomeScreen.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,14 @@ import 'package:flutter/material.dart';
 import 'src/views/SplashScreen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider<FillingScreenBloc>(
+      create: (context) => FillingScreenBloc(),
+    ),
+    BlocProvider<PersonalInfoBloc>(
+      create: (context) => PersonalInfoBloc(),
+    ),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
