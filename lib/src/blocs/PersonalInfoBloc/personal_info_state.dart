@@ -27,3 +27,12 @@ class PersonalInfoLoadFailure extends PersonalInfoState {
   @override
   List<Object?> get props => [error];
 }
+
+class PersonalInfoUpdating extends PersonalInfoState {
+  final PersonalInfo personalInfo;
+
+  PersonalInfoUpdating(this.personalInfo);
+
+  @override
+  List<Object?> get props => [personalInfo];
+}

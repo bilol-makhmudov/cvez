@@ -20,6 +20,7 @@ class _FillingScreenState extends State<FillingScreen> {
             FillingScreenBloc bloc =
                 BlocProvider.of<FillingScreenBloc>(context);
             return Scaffold(
+              resizeToAvoidBottomInset: false,
               appBar: AppBar(
                 backgroundColor: Colors.blue,
                 title: const Align(
@@ -46,6 +47,26 @@ class _FillingScreenState extends State<FillingScreen> {
                 children: [
                   _buildIconRow(bloc),
                   _buildPageView(bloc),
+                  InkWell(
+                    onTap: (() {
+                      bloc.add(NextPage());
+                    }),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(5)),
+                        padding: const EdgeInsets.all(10.0),
+                        child: Center(
+                          child: Text(
+                            "Next step",
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             );
@@ -67,7 +88,7 @@ class _FillingScreenState extends State<FillingScreen> {
 
   SizedBox _buildIconRow(FillingScreenBloc bloc) {
     return SizedBox(
-      height: 70,
+      height: 100,
       child: ListView.builder(
         controller: bloc.iconScrollController,
         scrollDirection: Axis.horizontal,
@@ -78,14 +99,26 @@ class _FillingScreenState extends State<FillingScreen> {
               bloc.add(PageTapped(index));
             },
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Icon(
-                bloc.currentPageIndex == index
-                    ? iconsSelected[index]
-                    : iconsUnselected[index],
-                size: 45,
-                color:
-                    bloc.currentPageIndex == index ? Colors.blue : Colors.grey,
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Icon(
+                    bloc.currentPageIndex == index
+                        ? iconsSelected[index]
+                        : iconsUnselected[index],
+                    size: 45,
+                    color: bloc.currentPageIndex == index
+                        ? Colors.blue
+                        : Colors.grey,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(pageNames[index]),
+                  ),
+                  bloc.currentPageIndex == index
+                      ? Container(height: 2, width: 45, color: Colors.blue)
+                      : SizedBox()
+                ],
               ),
             ),
           );

@@ -9,6 +9,7 @@ class FillingScreenBloc extends Bloc<FillingScreenEvent, FillingScreenState> {
   FillingScreenBloc() : super(FillingScreenInitial()) {
     on<PageTapped>(_onPageTapped);
     on<PageIndicatorChanged>(_onPageChanged);
+    on<NextPage>(_onNextPage);
   }
 
   Future<void> _onPageTapped(
@@ -48,6 +49,14 @@ class FillingScreenBloc extends Bloc<FillingScreenEvent, FillingScreenState> {
     }
     emit(PageChanged(
         pageIndex: currentPageIndex, screenWidth: event.screenWidth));
+  }
+
+  Future<void> _onNextPage(
+      NextPage event, Emitter<FillingScreenState> emit) async {
+    if (pageController.hasClients) {
+      pageController.nextPage(
+          duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+    }
   }
 
   @override

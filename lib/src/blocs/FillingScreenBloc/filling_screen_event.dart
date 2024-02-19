@@ -19,3 +19,7 @@ class PageIndicatorChanged extends FillingScreenEvent {
 
   const PageIndicatorChanged(this.screenWidth, this.pageIndex);
 }
+
+class NextPage extends FillingScreenEvent {
+  const NextPage();
+}

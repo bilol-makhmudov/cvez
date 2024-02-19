@@ -14,11 +14,11 @@ export 'Work.dart';
 
 final List pages = [
   AboutContainer(),
-  AdditionalContainer(),
   ContactsContainer(),
+  WorkContainer(),
   EducationContainer(),
+  AdditionalContainer(),
   SummaryContainer(),
-  WorkContainer()
 ];
 
 final List<IconData> iconsUnselected = [
@@ -39,4 +39,14 @@ final List<IconData> iconsSelected = [
   Icons.add_box,
   Icons.book,
   Icons.done_all,
+];
+
+final List<String> pageNames = [
+  "About",
+  "Contacts",
+  "Work",
+  "Education",
+  "Additional",
+  "Summary",
+  "Download"
 ];
