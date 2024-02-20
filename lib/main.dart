@@ -13,6 +13,7 @@ void main() {
     BlocProvider<PersonalInfoBloc>(
       create: (context) => PersonalInfoBloc(),
     ),
+    BlocProvider<ExperienceBloc>(create: (context) => ExperienceBloc())
   ], child: const MyApp()));
 }
 

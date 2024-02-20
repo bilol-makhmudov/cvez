@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'Widgets/workExperience.dart';
+import 'Widgets/addExperience.dart';
 
 class WorkContainer extends StatefulWidget {
   const WorkContainer({super.key});
@@ -44,6 +44,50 @@ class _WorkContainerState extends State<WorkContainer> {
               SizedBox(
                 height: 20,
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black,
+                            blurRadius: 0.2,
+                            offset: Offset.fromDirection(2)),
+                      ]),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Company name",
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "Position",
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          )
+                        ],
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.delete,
+                          color: Colors.blue,
+                        ),
+                        onPressed: () {},
+                      )
+                    ],
+                  ),
+                ),
+              ),
               InkWell(
                 onTap: (() {
                   showAddWorkExperience(context);
@@ -69,7 +113,7 @@ class _WorkContainerState extends State<WorkContainer> {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         )),
