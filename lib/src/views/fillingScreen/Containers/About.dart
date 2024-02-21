@@ -75,6 +75,7 @@ class _AboutState extends State<AboutContainer> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextField(
+                textInputAction: TextInputAction.next,
                 controller: _firstNameController,
                 decoration: InputDecoration(hintText: "First name"),
                 onChanged: (value) {
@@ -89,6 +90,7 @@ class _AboutState extends State<AboutContainer> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextField(
+                textInputAction: TextInputAction.next,
                 controller: _lastNameController,
                 decoration: InputDecoration(hintText: "Last name"),
                 onChanged: (value) {
@@ -103,6 +105,7 @@ class _AboutState extends State<AboutContainer> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextField(
+                textInputAction: TextInputAction.next,
                 controller: _jobTitleController,
                 decoration: InputDecoration(hintText: "Job title"),
                 onChanged: (value) {

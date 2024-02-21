@@ -1,17 +1,23 @@
+import 'package:uuid/uuid.dart';
+
 class Experience {
+  String id;
   String company;
   String position;
-  String location;
-  String description;
-  DateTime startDate;
+  String? location;
+  String? description;
+  DateTime? startDate;
   DateTime? finishDate;
+  bool? stillWorking;
 
-  Experience({
-    required this.company,
-    required this.position,
-    required this.location,
-    required this.description,
-    required this.startDate,
-    this.finishDate,
-  });
+  Experience(
+      {String? id,
+      required this.company,
+      required this.position,
+      this.location,
+      this.description,
+      this.startDate,
+      this.finishDate,
+      this.stillWorking})
+      : id = id ?? Uuid().v4();
 }
