@@ -1,3 +1,4 @@
+import '../../models/Education.dart';
 import '../bloc_barrel.dart';
 
 abstract class EducationState extends Equatable {
@@ -10,12 +11,12 @@ class EducationInitial extends EducationState {}
 class EducationLoadInProgress extends EducationState {}
 
 class EducationLoadSuccess extends EducationState {
-  final EducationState educationState;
+  final List<Education> educations;
 
-  EducationLoadSuccess(this.educationState);
+  EducationLoadSuccess(this.educations);
 
   @override
-  List<Object?> get props => [educationState];
+  List<Object?> get props => [educations];
 }
 
 class EducationLoadFailure extends EducationState {

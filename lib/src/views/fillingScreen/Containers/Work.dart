@@ -24,27 +24,31 @@ class _WorkContainerState extends State<WorkContainer> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
           SizedBox(height: 20),
-          Expanded(
-            child: BlocBuilder<ExperienceBloc, ExperienceState>(
-              builder: (context, state) {
-                if (state is ExperienceLoadSuccess &&
-                    state.experiences.isNotEmpty) {
-                  return ListView.builder(
-                    itemCount: state.experiences.length + 1,
-                    itemBuilder: (context, index) {
-                      if (index == state.experiences.length) {
-                        return _buildAddExperienceButton(context);
-                      } else {
-                        final experience = state.experiences[index];
-                        return ExperienceItem(
-                            experience: experience, context: context);
-                      }
-                    },
+          BlocBuilder<ExperienceBloc, ExperienceState>(
+            builder: (context, state) {
+              if (state is ExperienceLoadSuccess) {
+                if (state.experiences.isNotEmpty) {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: state.experiences.length + 1,
+                      itemBuilder: (context, index) {
+                        if (index == state.experiences.length) {
+                          return _buildAddExperienceButton(context);
+                        } else {
+                          final experience = state.experiences[index];
+                          return ExperienceItem(
+                              experience: experience, context: context);
+                        }
+                      },
+                    ),
                   );
+                } else {
+                  return _buildAddExperienceButton(context);
                 }
+              } else {
                 return _buildAddExperienceButton(context);
-              },
-            ),
+              }
+            },
           ),
         ]),
       ),
@@ -56,7 +60,7 @@ Widget _buildAddExperienceButton(BuildContext context) {
   return InkWell(
     onTap: (() {
       showAddWorkExperience(context,
-          experience: Experience(company: "", position: ""));
+          experience: Experience(company: "", position: ""), isUpdate: false);
     }),
     child: Padding(
       padding: const EdgeInsets.all(8.0),
@@ -83,7 +87,7 @@ Widget ExperienceItem(
     {required Experience experience, required BuildContext context}) {
   return InkWell(
     onTap: () {
-      showAddWorkExperience(context, experience: experience);
+      showAddWorkExperience(context, experience: experience, isUpdate: true);
     },
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),

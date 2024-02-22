@@ -24,11 +24,13 @@ class ExperienceBloc extends Bloc<ExperienceEvent, ExperienceState> {
       ExperienceUpdated event, Emitter<ExperienceState> emit) {
     final currentState = state;
     if (currentState is ExperienceLoadSuccess) {
-      final List<Experience> updatedExperiences = currentState.experiences
-          .map((experience) => experience.id == event.experience.id
-              ? event.experience
-              : experience)
-          .toList();
+      final updatedExperiences = currentState.experiences.map((experience) {
+        if (experience.id == event.experience.id) {
+          return event.experience;
+        }
+        return experience;
+      }).toList();
+
       emit(ExperienceLoadSuccess(updatedExperiences));
     }
   }

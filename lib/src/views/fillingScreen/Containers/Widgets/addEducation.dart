@@ -1,38 +1,33 @@
-import 'dart:math';
-
 import 'package:cv_ez/src/blocs/bloc_barrel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_month_picker/flutter_month_picker.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../blocs/ExperienceBloc/experience_event.dart';
-import '../../../../models/Experience.dart';
+import '../../../../models/Education.dart';
 
 void showAddWorkExperience(BuildContext context,
-    {required Experience experience, required bool isUpdate}) {
-  TextEditingController _companyController = TextEditingController();
-  TextEditingController _positionController = TextEditingController();
-  TextEditingController _locationController = TextEditingController();
+    {required Education education, required bool isUpdate}) {
+  TextEditingController _titleController = TextEditingController();
+  TextEditingController _majorController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
-  bool _stillWorking = false;
+  bool _stillStudying = false;
   DateTime? _startingDate = null;
   DateTime? _endingDate = null;
 
-  _companyController.text = experience.company;
-  _positionController.text = experience.position;
-  _locationController.text = experience.location ?? "";
-  _descriptionController.text = experience.description ?? "";
-  _stillWorking = experience.stillWorking ?? false;
-  _startingDate = experience.startDate;
-  _endingDate = experience.finishDate;
+  _titleController.text = education.title;
+  _majorController.text = education.major;
+  _descriptionController.text = education.description ?? "";
+  _stillStudying = education.stillStudying ?? false;
+  _startingDate = education.startDate;
+  _endingDate = education.endDate;
 
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
     builder: (BuildContext context) {
-      return BlocBuilder<ExperienceBloc, ExperienceState>(
+      return BlocBuilder<EducationBloc, EducationState>(
           builder: (context, state) {
-        final experienceBloc = context.read<ExperienceBloc>();
+        final educationBloc = context.read<EducationBloc>();
         return StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
           return Container(
@@ -47,8 +42,8 @@ void showAddWorkExperience(BuildContext context,
                   children: <Widget>[
                     TextField(
                       textInputAction: TextInputAction.next,
-                      controller: _companyController,
-                      decoration: InputDecoration(hintText: "Company name"),
+                      controller: _titleController,
+                      decoration: InputDecoration(hintText: "Title"),
                       onChanged: (value) {},
                     ),
                     SizedBox(
@@ -56,17 +51,8 @@ void showAddWorkExperience(BuildContext context,
                     ),
                     TextField(
                       textInputAction: TextInputAction.next,
-                      controller: _positionController,
-                      decoration: InputDecoration(hintText: "Position"),
-                      onChanged: (value) {},
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextField(
-                      textInputAction: TextInputAction.next,
-                      controller: _locationController,
-                      decoration: InputDecoration(hintText: "Location"),
+                      controller: _majorController,
+                      decoration: InputDecoration(hintText: "Major/Degree"),
                       onChanged: (value) {},
                     ),
                     SizedBox(
@@ -86,13 +72,13 @@ void showAddWorkExperience(BuildContext context,
                         Text("Start & End date"),
                         Spacer(),
                         Switch(
-                            value: _stillWorking,
+                            value: _stillStudying,
                             onChanged: (value) {
                               setState(() {
-                                _stillWorking = value;
+                                _stillStudying = value;
                               });
                             }),
-                        Text("Currently work here"),
+                        Text("Still studying"),
                       ],
                     ),
                     Row(
@@ -138,7 +124,7 @@ void showAddWorkExperience(BuildContext context,
                         ),
                         Expanded(
                           child: Visibility(
-                            visible: !_stillWorking,
+                            visible: !_stillStudying,
                             child: InkWell(
                               onTap: (() async {
                                 _endingDate = await showMonthPicker(
@@ -182,21 +168,20 @@ void showAddWorkExperience(BuildContext context,
                     ),
                     InkWell(
                       onTap: (() {
-                        final newExperience = Experience(
-                          company: _companyController.text,
-                          position: _positionController.text,
-                          location: _locationController.text,
+                        final newEducation = Education(
+                          title: _titleController.text,
+                          major: _majorController.text,
                           description: _descriptionController.text,
                           startDate: _startingDate,
-                          finishDate: _stillWorking ? null : _endingDate,
-                          stillWorking: _stillWorking,
+                          endDate: _stillStudying ? null : _endingDate,
+                          stillStudying: _stillStudying,
                         );
 
                         if (isUpdate) {
-                          newExperience.id = experience.id;
-                          experienceBloc.add(ExperienceUpdated(newExperience));
+                          newEducation.id = education.id;
+                          educationBloc.add(EducationUpdated(newEducation));
                         } else {
-                          experienceBloc.add(ExperienceAdded(newExperience));
+                          educationBloc.add(EducationAdded(newEducation));
                         }
                         Navigator.pop(context);
                       }),
