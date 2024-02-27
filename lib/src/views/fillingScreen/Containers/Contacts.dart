@@ -24,14 +24,16 @@ class _ContactsContainerState extends State<ContactsContainer> {
       TextEditingController();
 
   void updateControllers(PersonalInfo state) {
-    _emailController.text = state.email;
-    _phoneController.text = state.phoneNumber;
-    _webController.text = state.website;
-    _linkedInController.text = state.linkedIn;
-    _instagramController.text = state.instagram;
-    _twitterController.text = state.twitter;
-    _addressFirstLineController.text = state.addressFirstLine;
-    _addressSecondLineController.text = state.addressSecondLine;
+    if (mounted) {
+      _emailController.text = state.email;
+      _phoneController.text = state.phoneNumber;
+      _webController.text = state.website;
+      _linkedInController.text = state.linkedIn;
+      _instagramController.text = state.instagram;
+      _twitterController.text = state.twitter;
+      _addressFirstLineController.text = state.addressFirstLine;
+      _addressSecondLineController.text = state.addressSecondLine;
+    }
   }
 
   @override

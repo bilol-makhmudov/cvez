@@ -18,7 +18,8 @@ void main() {
     ),
     BlocProvider<EducationBloc>(
       create: (context) => EducationBloc(),
-    )
+    ),
+    BlocProvider<SkillBloc>(create: (context) => SkillBloc())
   ], child: const MyApp()));
 }
 

@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 class PersonalInfo {
   String firstName;
   String lastName;
@@ -11,7 +14,7 @@ class PersonalInfo {
   String addressFirstLine;
   String addressSecondLine;
   String summary;
-  String? personalPhoto;
+  File? personalPhoto;
 
   PersonalInfo({
     this.firstName = '',
@@ -26,7 +29,7 @@ class PersonalInfo {
     this.addressFirstLine = '',
     this.addressSecondLine = '',
     this.summary = '',
-    this.personalPhoto = '',
+    this.personalPhoto,
   });
 
   PersonalInfo copyWith({
@@ -42,7 +45,7 @@ class PersonalInfo {
     String? addressFirstLine,
     String? addressSecondLine,
     String? summary,
-    String? personalPhoto,
+    File? personalPhoto,
   }) {
     return PersonalInfo(
       firstName: firstName ?? this.firstName,

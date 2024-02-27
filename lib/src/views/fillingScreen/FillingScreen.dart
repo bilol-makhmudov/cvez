@@ -1,5 +1,7 @@
 import 'package:cv_ez/src/blocs/bloc_barrel.dart';
 import 'package:flutter/material.dart';
+import '../../templates/BlackWhite.dart';
+import '../../utils/pdfCreator.dart';
 import 'Containers/Containers.dart';
 
 class FillingScreen extends StatefulWidget {
@@ -15,6 +17,12 @@ class _FillingScreenState extends State<FillingScreen> {
     return BlocBuilder<FillingScreenBloc, FillingScreenState>(
         builder: (context, state) {
       FillingScreenBloc bloc = BlocProvider.of<FillingScreenBloc>(context);
+      PersonalInfoBloc personalInfoBloc =
+          BlocProvider.of<PersonalInfoBloc>(context);
+      EducationBloc educationBloc = BlocProvider.of<EducationBloc>(context);
+      ExperienceBloc experienceBloc = BlocProvider.of<ExperienceBloc>(context);
+      SkillBloc skillBloc = BlocProvider.of<SkillBloc>(context);
+
       return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -42,8 +50,17 @@ class _FillingScreenState extends State<FillingScreen> {
             _buildIconRow(bloc),
             _buildPageView(bloc),
             InkWell(
-              onTap: (() {
-                bloc.add(NextPage());
+              onTap: (() async {
+                if (bloc.currentPageIndex == pages.length - 1) {
+                  String pdfPath = await generateCvPdf(personalInfoBloc,
+                      educationBloc, experienceBloc, skillBloc);
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => PdfPreviewScreen(
+                            pdfPath: pdfPath,
+                          )));
+                } else {
+                  bloc.add(NextPage());
+                }
               }),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

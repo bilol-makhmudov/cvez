@@ -28,17 +28,16 @@ class _EducationContainerState extends State<EducationContainer> {
                 if (state.educations.isNotEmpty) {
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: state.educations.length + 1,
-                      itemBuilder: (context, index) {
-                        if (index == state.educations.length) {
-                          return _buildAddEducationButton(context);
-                        } else {
-                          final experience = state.educations[index];
-                          return EducationItem(
-                              education: experience, context: context);
-                        }
-                      },
-                    ),
+                        itemCount: state.educations.length + 1,
+                        itemBuilder: (context, index) {
+                          if (index == state.educations.length) {
+                            return _buildAddEducationButton(context);
+                          } else {
+                            final experience = state.educations[index];
+                            return EducationItem(
+                                education: experience, context: context);
+                          }
+                        }),
                   );
                 } else {
                   return _buildAddEducationButton(context);

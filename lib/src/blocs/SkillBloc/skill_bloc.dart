@@ -9,12 +9,36 @@ class SkillBloc extends Bloc<SkillEvent, SkillState> {
   }
 
   void _onSkillAdded(SkillAdded event, Emitter<SkillState> emit) {
-    final newState = List<Skill>.from((state as SkillLoadSuccess).skills)
-      ..add(event.skill);
-    emit(SkillLoadSuccess(newState));
+    final currentState = state;
+    if (currentState is SkillLoadSuccess) {
+      final updatedSkill = List<Skill>.from(currentState.skills)
+        ..add(event.skill);
+      emit(SkillLoadSuccess(updatedSkill));
+    } else {
+      emit(SkillLoadSuccess([event.skill]));
+    }
   }
 
-  void _onSkillUpdated(SkillUpdated event, Emitter<SkillState> emit) {}
+  void _onSkillUpdated(SkillUpdated event, Emitter<SkillState> emit) {
+    final currentState = state;
+    if (currentState is SkillLoadSuccess) {
+      final updatedSkill = currentState.skills.map((skill) {
+        if (skill.id == event.skill.id) {
+          return event.skill;
+        }
+        return skill;
+      }).toList();
 
-  void _onSkillDeleted(SkillDeleted event, Emitter<SkillState> emit) {}
+      emit(SkillLoadSuccess(updatedSkill));
+    }
+  }
+
+  void _onSkillDeleted(SkillDeleted event, Emitter<SkillState> emit) {
+    final currentState = state;
+    if (currentState is SkillLoadSuccess) {
+      final updatedSkill =
+          currentState.skills.where((skill) => skill.id != event.id).toList();
+      emit(SkillLoadSuccess(updatedSkill));
+    }
+  }
 }

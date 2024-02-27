@@ -4,7 +4,6 @@ import 'package:cv_ez/src/blocs/bloc_barrel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_month_picker/flutter_month_picker.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../blocs/ExperienceBloc/experience_event.dart';
 import '../../../../models/Experience.dart';
 
