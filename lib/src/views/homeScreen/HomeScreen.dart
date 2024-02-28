@@ -55,35 +55,111 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16),
                       child: Container(
-                        width: 200,
-                        height: 200,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(width: 1)),
-                      ),
+                          height: 200,
+                          width: 150,
+                          child: Stack(
+                            children: [
+                              ColorFiltered(
+                                colorFilter: ColorFilter.mode(
+                                    Colors.black12, BlendMode.darken),
+                                child: Image.asset(
+                                  "assets/template1.jpg",
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Icon(
+                                  Icons.check,
+                                  color: Colors.green,
+                                  size: 50,
+                                ),
+                              ),
+                            ],
+                          )),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16),
                       child: Container(
-                        width: 200,
-                        height: 200,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(width: 1)),
-                      ),
+                          height: 200,
+                          width: 150,
+                          child: Stack(
+                            children: [
+                              ColorFiltered(
+                                colorFilter: ColorFilter.mode(
+                                    Colors.black12, BlendMode.darken),
+                                child: Image.asset(
+                                  "assets/template2.jpg",
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Coming soon",
+                                  style: TextStyle(
+                                      color: Colors.green, fontSize: 18),
+                                ),
+                              ),
+                            ],
+                          )),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16),
                       child: Container(
-                        width: 200,
-                        height: 200,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(width: 1)),
-                      ),
-                    )
+                          height: 200,
+                          width: 150,
+                          child: Stack(
+                            children: [
+                              ColorFiltered(
+                                colorFilter: ColorFilter.mode(
+                                    Colors.black12, BlendMode.darken),
+                                child: Image.asset(
+                                  "assets/template3.jpg",
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Coming soon",
+                                  style: TextStyle(
+                                      color: Colors.green, fontSize: 18),
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16),
+                      child: Container(
+                          height: 200,
+                          width: 150,
+                          decoration:
+                              BoxDecoration(border: Border.all(width: 1)),
+                          child: Stack(
+                            children: [
+                              ColorFiltered(
+                                colorFilter: ColorFilter.mode(
+                                    Colors.white, BlendMode.darken),
+                              ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Coming soon",
+                                  style: TextStyle(
+                                      color: Colors.green, fontSize: 18),
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
                   ],
                 ),
               ),
@@ -105,6 +181,17 @@ class HomeScreen extends StatelessWidget {
             Expanded(
               child: Container(
                 height: 150,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "In the coming updates you'll be able to see your previously created CVs here",
+                        style: TextStyle(color: Colors.green),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Spacer(),

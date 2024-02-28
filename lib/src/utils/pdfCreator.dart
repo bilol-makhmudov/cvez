@@ -24,21 +24,28 @@ Future<String> generateCvPdf(
   final educations = educationBloc.state is EducationLoadSuccess
       ? (educationBloc.state as EducationLoadSuccess).educations
       : <Education>[];
+  final skills = skillBloc.state is SkillLoadSuccess
+      ? (skillBloc.state as SkillLoadSuccess).skills
+      : <Skill>[];
 
   pdf.addPage(
     pw.Page(
       pageFormat: PdfPageFormat.a4,
+      margin: pw.EdgeInsets.zero,
       build: (pw.Context context) {
         return pw.Container(
+          padding: pw.EdgeInsets.zero,
+          margin: pw.EdgeInsets.zero,
           width: contentWidth,
           height: contentHeight,
           decoration: pw.BoxDecoration(
-              color: PdfColors.red,
+              color: PdfColors.white,
               border: pw.Border.all(width: 1, color: PdfColors.black)),
           child: pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
               pw.Container(
+                  margin: pw.EdgeInsets.zero,
                   padding: pw.EdgeInsets.symmetric(vertical: 20),
                   width: contentWidth * 0.3,
                   height: contentHeight,
@@ -57,7 +64,7 @@ Future<String> generateCvPdf(
                     ),
                     pw.SizedBox(height: 20),
                     pw.Padding(
-                      padding: pw.EdgeInsets.only(left: 20),
+                      padding: pw.EdgeInsets.only(left: 20, right: 5),
                       child: pw.Column(
                           mainAxisAlignment: pw.MainAxisAlignment.start,
                           crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -134,24 +141,93 @@ Future<String> generateCvPdf(
                               thickness: 1,
                             ),
                             pw.SizedBox(height: 10),
-                            ...educations
-                                .map((education) => pw.Column(children: [
+                            ...educations.map((education) => pw.Column(
+                                    crossAxisAlignment:
+                                        pw.CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        pw.MainAxisAlignment.start,
+                                    children: [
+                                      pw.Row(children: [
+                                        pw.Text(
+                                          education.startDate != null
+                                              ? "${education.startDate!.month.toString().padLeft(2, '0')}.${education.startDate!.year}"
+                                              : "",
+                                          style: pw.TextStyle(
+                                              color: PdfColors.white,
+                                              fontSize: 10),
+                                        ),
+                                        pw.Text(
+                                          education.endDate != null
+                                              ? " - ${education.endDate!.month.toString().padLeft(2, '0')}.${education.endDate!.year}"
+                                              : "",
+                                          style: pw.TextStyle(
+                                              color: PdfColors.white,
+                                              fontSize: 10),
+                                        ),
+                                        if (education.stillStudying == true)
+                                          pw.Text(
+                                            " - Present",
+                                            style: pw.TextStyle(
+                                                color: PdfColors.white,
+                                                fontSize: 10),
+                                          ),
+                                      ]),
+                                      pw.SizedBox(height: 5),
                                       pw.Text(
-                                        "${education.startDate!.month.toString().padLeft(2, '0')}.${education.startDate!.year}",
+                                        education.major,
+                                        style: pw.TextStyle(
+                                            color: PdfColors.white,
+                                            fontSize: 12,
+                                            fontWeight: pw.FontWeight.bold),
+                                      ),
+                                      pw.SizedBox(height: 5),
+                                      pw.Text(
+                                        education.title,
                                         style: pw.TextStyle(
                                             color: PdfColors.white,
                                             fontSize: 12),
                                       ),
-                                    ]))
+                                      pw.SizedBox(height: 5),
+                                      pw.Text(
+                                        education.description,
+                                        style: pw.TextStyle(
+                                            color: PdfColors.white,
+                                            fontSize: 9),
+                                      ),
+                                      pw.SizedBox(height: 20),
+                                    ])),
+                            pw.Text(
+                              "Skills",
+                              style: pw.TextStyle(
+                                  color: PdfColors.white,
+                                  fontSize: 16,
+                                  fontWeight: pw.FontWeight.bold),
+                            ),
+                            pw.Divider(
+                              color: PdfColors.white,
+                              thickness: 1,
+                            ),
+                            ...skills.map((s) => pw.Column(children: [
+                                  pw.Text(
+                                    s.name,
+                                    style: pw.TextStyle(
+                                        color: PdfColors.white,
+                                        fontSize: 12,
+                                        fontWeight: pw.FontWeight.bold),
+                                  ),
+                                ]))
                           ]),
                     ),
                   ])),
-              pw.Container(
-                padding: pw.EdgeInsets.symmetric(vertical: 20),
-                width: contentWidth * 0.65,
-                height: contentHeight,
-                color: PdfColors.white,
-              ),
+              pw.Expanded(
+                child: pw.Container(
+                  margin: pw.EdgeInsets.zero,
+                  padding: pw.EdgeInsets.symmetric(vertical: 20),
+                  width: contentWidth * 0.7,
+                  height: contentHeight,
+                  color: PdfColors.red,
+                ),
+              )
             ],
           ),
         );
