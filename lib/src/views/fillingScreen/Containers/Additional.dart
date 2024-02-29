@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/bloc_barrel.dart';
+import '../../../utils/dropdownItems.dart';
 import 'Widgets/addSkills.dart';
 
 class AdditionalContainer extends StatefulWidget {
@@ -55,8 +56,7 @@ class _AdditionalContainerState extends State<AdditionalContainer> {
 Widget _buildAddAdditionalSkillButton(BuildContext context) {
   return InkWell(
     onTap: (() {
-      showAddSkills(context,
-          skill: Skill(name: '', level: '', note: ''), isUpdate: false);
+      showAddSkills(context, skill: Skill(name: '', note: ''), isUpdate: false);
     }),
     child: Padding(
       padding: const EdgeInsets.all(8.0),
@@ -109,7 +109,7 @@ Widget SkillItem({required Skill skill, required BuildContext context}) {
                 Text(skill.name,
                     style: TextStyle(color: Colors.black, fontSize: 18)),
                 SizedBox(height: 5),
-                Text(skill.level,
+                Text(skillLevels[skill.level] ?? "",
                     style: TextStyle(color: Colors.black, fontSize: 18)),
               ],
             ),

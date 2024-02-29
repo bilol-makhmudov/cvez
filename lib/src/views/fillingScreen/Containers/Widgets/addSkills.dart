@@ -9,6 +9,10 @@ void showAddSkills(BuildContext context,
   TextEditingController _skillNameController = TextEditingController();
   TextEditingController _noteController = TextEditingController();
 
+  _skillLevel = skill.level;
+  _skillNameController.text = skill.name;
+  _noteController.text = skill.note;
+
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -78,7 +82,7 @@ void showAddSkills(BuildContext context,
                       onTap: (() {
                         final newSkill = Skill(
                           name: _skillNameController.text,
-                          level: skillLevels[_skillLevel] ?? "",
+                          level: _skillLevel,
                           note: _noteController.text,
                         );
 

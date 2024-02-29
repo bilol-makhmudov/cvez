@@ -3,13 +3,13 @@ import 'package:uuid/uuid.dart';
 class Skill {
   String id;
   String name;
-  String level;
+  int? level;
   String note;
 
   Skill({
     String? id,
     required this.name,
-    required this.level,
+    this.level,
     required this.note,
   }) : id = id ?? Uuid().v4();
 }
