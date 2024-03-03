@@ -1,7 +1,7 @@
 import 'package:cv_ez/src/blocs/bloc_barrel.dart';
 import 'package:flutter/material.dart';
-import '../../templates/BlackWhite.dart';
-import '../../utils/pdfCreator.dart';
+import '../../templates/template1/template1.dart';
+import '../contactScreen/ContactScreen.dart';
 import 'Containers/Containers.dart';
 
 class FillingScreen extends StatefulWidget {
@@ -36,13 +36,25 @@ class _FillingScreenState extends State<FillingScreen> {
             ),
           ),
           actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.menu,
-                size: 25,
-              ),
-              onPressed: () {},
-            )
+            PopupMenuButton<String>(
+              onSelected: (click) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ContactScreen(),
+                  ),
+                );
+              },
+              itemBuilder: (BuildContext context) {
+                return {
+                  'Contact',
+                }.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              },
+            ),
           ],
         ),
         body: Column(
@@ -52,12 +64,8 @@ class _FillingScreenState extends State<FillingScreen> {
             InkWell(
               onTap: (() async {
                 if (bloc.currentPageIndex == pages.length - 1) {
-                  String pdfPath = await generateCvPdf(personalInfoBloc,
-                      educationBloc, experienceBloc, skillBloc);
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => PdfPreviewScreen(
-                            pdfPath: pdfPath,
-                          )));
+                  await generateTemplate1(personalInfoBloc, educationBloc,
+                      experienceBloc, skillBloc, context);
                 } else {
                   bloc.add(NextPage());
                 }

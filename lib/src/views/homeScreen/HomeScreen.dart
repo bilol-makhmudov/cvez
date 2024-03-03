@@ -1,3 +1,4 @@
+import 'package:cv_ez/src/views/contactScreen/ContactScreen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,13 +21,25 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.menu,
-                size: 25,
-              ),
-              onPressed: () {},
-            )
+            PopupMenuButton<String>(
+              onSelected: (click) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ContactScreen(),
+                  ),
+                );
+              },
+              itemBuilder: (BuildContext context) {
+                return {
+                  'Contact',
+                }.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              },
+            ),
           ],
         ),
         body: Column(
@@ -186,7 +199,7 @@ class HomeScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "In the coming updates you'll be able to see your previously created CVs here",
+                        "In the coming updates you'll be able to see created CVs here",
                         style: TextStyle(color: Colors.green),
                       ),
                     )

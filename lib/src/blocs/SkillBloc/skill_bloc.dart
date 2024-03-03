@@ -6,6 +6,7 @@ class SkillBloc extends Bloc<SkillEvent, SkillState> {
     on<SkillAdded>(_onSkillAdded);
     on<SkillUpdated>(_onSkillUpdated);
     on<SkillDeleted>(_onSkillDeleted);
+    on<ResetSkills>(_onResetSkills);
   }
 
   void _onSkillAdded(SkillAdded event, Emitter<SkillState> emit) {
@@ -40,5 +41,9 @@ class SkillBloc extends Bloc<SkillEvent, SkillState> {
           currentState.skills.where((skill) => skill.id != event.id).toList();
       emit(SkillLoadSuccess(updatedSkill));
     }
+  }
+
+  void _onResetSkills(ResetSkills event, Emitter<SkillState> emit) {
+    emit(SkillInitial());
   }
 }

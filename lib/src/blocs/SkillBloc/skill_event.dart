@@ -32,3 +32,5 @@ class SkillDeleted extends SkillEvent {
   @override
   List<Object> get props => [id];
 }
+
+class ResetSkills extends SkillEvent {}
