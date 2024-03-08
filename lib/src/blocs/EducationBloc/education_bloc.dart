@@ -1,3 +1,4 @@
+import 'package:cv_ez/src/blocs/EducationBloc/education_state.dart';
 import 'package:cv_ez/src/models/Education.dart';
 
 import '../bloc_barrel.dart';
@@ -44,5 +45,9 @@ class EducationBloc extends Bloc<EducationEvent, EducationState> {
           .toList();
       emit(EducationLoadSuccess(updatedEducation));
     }
+  }
+
+  void clearState() {
+    emit(EducationInitial());
   }
 }

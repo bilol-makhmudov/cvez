@@ -1,3 +1,4 @@
+import 'package:cv_ez/src/blocs/FillingScreenBloc/filling_screen_state.dart';
 import 'package:flutter/material.dart';
 import '../bloc_barrel.dart';
 
@@ -22,6 +23,10 @@ class FillingScreenBloc extends Bloc<FillingScreenEvent, FillingScreenState> {
         curve: Curves.easeInOut,
       );
     }
+  }
+
+  void clearState() {
+    emit(FillingScreenInitial());
   }
 
   Future<void> _onPageChanged(

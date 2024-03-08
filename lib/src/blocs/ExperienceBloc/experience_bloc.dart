@@ -1,3 +1,5 @@
+import 'package:cv_ez/src/blocs/ExperienceBloc/experience_state.dart';
+
 import '../../models/Experience.dart';
 import '../bloc_barrel.dart';
 
@@ -44,5 +46,9 @@ class ExperienceBloc extends Bloc<ExperienceEvent, ExperienceState> {
           .toList();
       emit(ExperienceLoadSuccess(updatedExperiences));
     }
+  }
+
+  void clearState() {
+    emit(ExperienceInitial());
   }
 }

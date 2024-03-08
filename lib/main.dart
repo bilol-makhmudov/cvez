@@ -2,10 +2,10 @@ import 'package:cv_ez/src/blocs/bloc_barrel.dart';
 import 'package:cv_ez/src/views/fillingScreen/FillingScreen.dart';
 import 'package:cv_ez/src/views/homeScreen/HomeScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:month_year_picker/month_year_picker.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'src/views/SplashScreen.dart';
-
-void main() {
+Future<void> main() async {
   runApp(MultiBlocProvider(providers: [
     BlocProvider<FillingScreenBloc>(
       create: (context) => FillingScreenBloc(),
@@ -37,6 +37,16 @@ class MyApp extends StatelessWidget {
           }
           return null;
         },
+        supportedLocales: const [
+          Locale('en', ''),
+          Locale('uz', ''),
+          Locale('tr', ''),
+        ],
+        localizationsDelegates: [
+          MonthYearPickerLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+        ],
         home: HomeScreen());
   }
 }

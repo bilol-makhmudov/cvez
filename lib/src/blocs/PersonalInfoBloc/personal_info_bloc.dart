@@ -13,4 +13,8 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
     personalInfo = event.personalInfo;
     emit(PersonalInfoLoadSuccess(personalInfo));
   }
+
+  void clearState() {
+    emit(PersonalInfoInitial());
+  }
 }

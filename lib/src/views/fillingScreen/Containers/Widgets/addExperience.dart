@@ -1,6 +1,7 @@
 import 'package:cv_ez/src/blocs/bloc_barrel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 import '../../../../blocs/ExperienceBloc/experience_event.dart';
 import '../../../../models/Experience.dart';
 
@@ -96,14 +97,14 @@ void showAddWorkExperience(BuildContext context,
                         Expanded(
                           child: InkWell(
                             onTap: (() async {
-                              // _startingDate = await showMonthPicker(
-                              //   context: context,
-                              //   initialDate: DateTime.now(), // Today's date
-                              //   firstDate: DateTime(1950, 5),
-                              //   lastDate: DateTime(2050),
-                              // );
+                              _startingDate = await showMonthYearPicker(
+                                context: context,
+                                initialDate: _startingDate ?? DateTime.now(),
+                                firstDate: DateTime(1950),
+                                lastDate: DateTime(2050),
+                              );
                               setState(() {
-                                _endingDate;
+                                _startingDate;
                               });
                             }),
                             child: Container(
@@ -137,12 +138,12 @@ void showAddWorkExperience(BuildContext context,
                             visible: !_stillWorking,
                             child: InkWell(
                               onTap: (() async {
-                                // _endingDate = await showMonthPicker(
-                                //   context: context,
-                                //   initialDate: DateTime.now(), // Today's date
-                                //   firstDate: DateTime(1950, 5),
-                                //   lastDate: DateTime(2050),
-                                // );
+                                _endingDate = await showMonthYearPicker(
+                                  context: context,
+                                  initialDate: _endingDate ?? DateTime.now(),
+                                  firstDate: DateTime(1950),
+                                  lastDate: DateTime(2050),
+                                );
                                 setState(() {
                                   _endingDate;
                                 });

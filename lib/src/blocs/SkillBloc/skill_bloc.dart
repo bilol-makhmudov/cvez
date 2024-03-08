@@ -46,4 +46,8 @@ class SkillBloc extends Bloc<SkillEvent, SkillState> {
   void _onResetSkills(ResetSkills event, Emitter<SkillState> emit) {
     emit(SkillInitial());
   }
+
+  void clearState() {
+    emit(SkillInitial());
+  }
 }

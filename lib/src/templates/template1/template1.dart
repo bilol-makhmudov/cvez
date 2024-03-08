@@ -8,6 +8,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import '../../blocs/bloc_barrel.dart';
 import '../../models/models.dart';
+import '../../utils/NavigationToHome.dart';
 import '../../utils/fileSaver.dart';
 import '../../utils/pdfTextStyles.dart';
 import 'education.dart';
@@ -90,5 +91,7 @@ Future<void> generateTemplate1(
 
   final Uint8List bytes = await pdf.save();
 
-  savePdfFile(bytes, personalInfoBloc, context);
+  savePdfFile(bytes, personalInfoBloc, context, () {
+    resetAndNavigateToHome(context);
+  });
 }

@@ -8,7 +8,7 @@ import '../blocs/PersonalInfoBloc/personal_info_bloc.dart';
 import '../widgets/snackBar.dart';
 
 Future<void> savePdfFile(Uint8List pdfBytes, PersonalInfoBloc personalInfoBloc,
-    BuildContext context) async {
+    BuildContext context, Function onFileSaved) async {
   final tempDir = await getTemporaryDirectory();
   final tempPath = tempDir.path;
 
@@ -20,10 +20,8 @@ Future<void> savePdfFile(Uint8List pdfBytes, PersonalInfoBloc personalInfoBloc,
   final filePath = await FlutterFileDialog.saveFile(params: params);
 
   if (filePath != null && filePath.isNotEmpty) {
-    final savedFile = File(filePath);
-    await file.copy(savedFile.path);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-        showCustomSnackBar("File has been saved here: ${filePath}"));
+    ScaffoldMessenger.of(context)
+        .showSnackBar(showCustomSnackBar("File has been saved"));
+    onFileSaved();
   }
 }
