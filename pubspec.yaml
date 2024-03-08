@@ -46,6 +46,7 @@ dependencies:
   flutter_file_dialog: ^3.0.2
   mailer: ^6.1.0
   month_year_picker: ^0.3.0+1
+  email_validator: ^2.0.1
 
 dev_dependencies:
   flutter_test:

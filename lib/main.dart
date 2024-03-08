@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         onGenerateRoute: (RouteSettings settings) {
           if (settings.name == HomeScreen.routeName) {
             return MaterialPageRoute(builder: (context) => HomeScreen());
