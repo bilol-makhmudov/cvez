@@ -1,6 +1,5 @@
 import 'package:cv_ez/src/views/contactScreen/ContactScreen.dart';
-import 'package:cv_ez/src/views/homeScreen/widgets/comingSoonTemplate.dart';
-import 'package:cv_ez/src/views/homeScreen/widgets/selectedTemplate.dart';
+import 'package:cv_ez/src/views/homeScreen/comingSoonTemplate/ComingSoonTemplate.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -67,12 +66,16 @@ class HomeScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 controller: templateScrollController,
                 scrollDirection: Axis.horizontal,
-                child: Row(
+                child: const Row(
                   children: [
-                    SelectedTemplate("assets/template1.jpg"),
+                    /*
                     ComingSoonTemplate("assets/template2.jpg"),
                     ComingSoonTemplate("assets/template3.jpg"),
-                    ComingSoonTemplate(null),
+                    ComingSoonTemplate("assets/template4.jpg"),
+                    ComingSoonTemplate("assets/template5.jpg"),
+                    ComingSoonTemplate("assets/template6.jpg"),
+                     */
+                    ComingSoonTemplates()
                   ],
                 ),
               ),
