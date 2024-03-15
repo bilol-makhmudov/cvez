@@ -51,41 +51,6 @@ class HomeScreen extends StatelessWidget {
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Text(
-                  "Popular templates",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontFamily: "Outfit",
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Scrollbar(
-              controller: templateScrollController,
-              thumbVisibility: true,
-              trackVisibility: true,
-              child: SingleChildScrollView(
-                controller: templateScrollController,
-                scrollDirection: Axis.horizontal,
-                child: const Row(
-                  children: [
-                    /*
-                    ComingSoonTemplate("assets/template2.jpg"),
-                    ComingSoonTemplate("assets/template3.jpg"),
-                    ComingSoonTemplate("assets/template4.jpg"),
-                    ComingSoonTemplate("assets/template5.jpg"),
-                    ComingSoonTemplate("assets/template6.jpg"),
-                     */
-                    ComingSoonTemplates()
-                  ],
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                 child: Text(
@@ -147,13 +112,13 @@ class HomeScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.add_circle_outlined,
                         size: 50,
                         color: Colors.green,
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/fillingScreen');
+                        Navigator.pushNamed(context, '/templateScreen');
                       },
                     ),
                   )

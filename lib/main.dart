@@ -1,6 +1,7 @@
 import 'package:cv_ez/src/blocs/bloc_barrel.dart';
 import 'package:cv_ez/src/views/fillingScreen/FillingScreen.dart';
 import 'package:cv_ez/src/views/homeScreen/HomeScreen.dart';
+import 'package:cv_ez/src/views/templateScreen/TemplateScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -35,6 +36,8 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => HomeScreen());
           } else if (settings.name == FillingScreen.routeName) {
             return MaterialPageRoute(builder: (context) => FillingScreen());
+          }else if (settings.name == TemplateScreen.routeName) {
+            return MaterialPageRoute(builder: (context) => TemplateScreen());
           }
           return null;
         },

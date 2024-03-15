@@ -13,42 +13,50 @@ class ComingSoonTemplates extends StatelessWidget {
       String assetPath = "assets/template$i.jpg";
 
       templates.add(
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-          child: Container(
-            height: 200,
-            width: 150,
-            decoration: BoxDecoration(
-              border: Border.all(width: 1),
-            ),
-            child: Stack(
-              children: [
-                ColorFiltered(
-                  colorFilter: const ColorFilter.mode(Colors.black12, BlendMode.darken),
-                  child: Image.asset(
-                    assetPath,
-                    fit: BoxFit.fill,
+        GestureDetector(
+          onTap: () {
+            print(assetPath);
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+            child: SizedBox(
+              height: 200,
+              width: 150,
+              child: Stack(
+                children: [
+                  ColorFiltered(
+                    colorFilter: const ColorFilter.mode(Colors.black12, BlendMode.darken),
+                    child: Image.asset(
+                      assetPath,
+                      width: 150,
+                      height: 200,
+                    ),
                   ),
-                ),
-                const Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Coming soon",
-                    style: TextStyle(color: Colors.green, fontSize: 18),
+                  const Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Coming soon",
+                      style: TextStyle(color: Colors.green, fontSize: 18),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
       );
     }
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: templates,
-      ),
+    return GridView.count(
+      primary: false,
+      padding: const EdgeInsets.all(20),
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      crossAxisCount: 2,
+      scrollDirection: Axis.vertical,
+      physics: const ScrollPhysics(),
+      controller: ScrollController(),
+      children: templates,
     );
   }
 }
