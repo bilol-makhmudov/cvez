@@ -12,7 +12,7 @@ class TemplateScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 2.0,
         backgroundColor: Colors.blue,
-        title: const Text("Templates",style: TextStyle(color: Colors.white)),
+        title: const Text("Templates", style: TextStyle(color: Colors.white)),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Column(
@@ -30,7 +30,8 @@ class TemplateScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
               ),
-              child: const Text("Create Resume",style: TextStyle(color: Colors.white)),
+              child: const Text("Create Resume",
+                  style: TextStyle(color: Colors.white)),
             ),
           ),
         ],

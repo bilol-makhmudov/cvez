@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "858720680117",
+    "project_id": "cv-ez-c1d8f",
+    "storage_bucket": "cv-ez-c1d8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858720680117:android:20210ee1d91a86a7afe6fc",
+        "android_client_info": {
+          "package_name": "com.example.cv_ez"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvBSDCEVDsCAK2kzZz2mysau_qRNLpFhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

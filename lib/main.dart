@@ -1,13 +1,21 @@
+import 'package:cv_ez/src/blocs/AuthenticationBloc/authentication_bloc.dart';
 import 'package:cv_ez/src/blocs/bloc_barrel.dart';
+import 'package:cv_ez/src/views/AuthScreens/AuthenticationFlowScreen.dart';
 import 'package:cv_ez/src/views/fillingScreen/FillingScreen.dart';
 import 'package:cv_ez/src/views/homeScreen/HomeScreen.dart';
 import 'package:cv_ez/src/views/templateScreen/TemplateScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(MultiBlocProvider(providers: [
+    BlocProvider<AuthenticationBloc>(create: (context) => AuthenticationBloc()),
     BlocProvider<FillingScreenBloc>(
       create: (context) => FillingScreenBloc(),
     ),
@@ -20,7 +28,7 @@ Future<void> main() async {
     BlocProvider<EducationBloc>(
       create: (context) => EducationBloc(),
     ),
-    BlocProvider<SkillBloc>(create: (context) => SkillBloc())
+    BlocProvider<SkillBloc>(create: (context) => SkillBloc()),
   ], child: const MyApp()));
 }
 
@@ -30,13 +38,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          focusColor: Colors.transparent,
+        ),
+        debugShowCheckedModeBanner: false,
         onGenerateRoute: (RouteSettings settings) {
           if (settings.name == HomeScreen.routeName) {
             return MaterialPageRoute(builder: (context) => HomeScreen());
           } else if (settings.name == FillingScreen.routeName) {
             return MaterialPageRoute(builder: (context) => FillingScreen());
-          }else if (settings.name == TemplateScreen.routeName) {
+          } else if (settings.name == TemplateScreen.routeName) {
             return MaterialPageRoute(builder: (context) => TemplateScreen());
           }
           return null;
@@ -51,6 +64,6 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
         ],
-        home: HomeScreen());
+        home: AuthenticationFlowScreen());
   }
 }

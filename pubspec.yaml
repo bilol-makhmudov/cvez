@@ -47,6 +47,8 @@ dependencies:
   mailer: ^6.1.0
   month_year_picker: ^0.3.0+1
   email_validator: ^2.0.1
+  firebase_core: ^2.27.1
+  firebase_auth: ^4.17.9
 
 dev_dependencies:
   flutter_test:
