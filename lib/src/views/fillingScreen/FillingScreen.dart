@@ -26,6 +26,9 @@ class _FillingScreenState extends State<FillingScreen> {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
           backgroundColor: Colors.blue,
           title: const Align(
             alignment: Alignment.topLeft,

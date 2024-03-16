@@ -1,6 +1,5 @@
 import 'package:cv_ez/src/views/contactScreen/ContactScreen.dart';
-import 'package:cv_ez/src/views/homeScreen/widgets/comingSoonTemplate.dart';
-import 'package:cv_ez/src/views/homeScreen/widgets/selectedTemplate.dart';
+import 'package:cv_ez/src/views/homeScreen/comingSoonTemplate/ComingSoonTemplate.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,6 +12,9 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
           backgroundColor: Colors.blue,
           title: const Align(
             alignment: Alignment.topLeft,
@@ -46,37 +48,6 @@ class HomeScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Text(
-                  "Popular templates",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontFamily: "Outfit",
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Scrollbar(
-              controller: templateScrollController,
-              thumbVisibility: true,
-              trackVisibility: true,
-              child: SingleChildScrollView(
-                controller: templateScrollController,
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    SelectedTemplate("assets/template1.jpg"),
-                    ComingSoonTemplate("assets/template2.jpg"),
-                    ComingSoonTemplate("assets/template3.jpg"),
-                    ComingSoonTemplate(null),
-                  ],
-                ),
-              ),
-            ),
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
@@ -141,13 +112,13 @@ class HomeScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.add_circle_outlined,
                         size: 50,
                         color: Colors.green,
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/fillingScreen');
+                        Navigator.pushNamed(context, '/templateScreen');
                       },
                     ),
                   )
