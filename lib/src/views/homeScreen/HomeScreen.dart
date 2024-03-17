@@ -1,6 +1,9 @@
 import 'package:cv_ez/src/views/contactScreen/ContactScreen.dart';
 import 'package:cv_ez/src/views/homeScreen/comingSoonTemplate/ComingSoonTemplate.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/AuthenticationBloc/authentication_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -27,16 +30,10 @@ class HomeScreen extends StatelessWidget {
           actions: [
             PopupMenuButton<String>(
               onSelected: (click) {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const ContactScreen(),
-                  ),
-                );
+                handleAppbarClick(click, context);
               },
               itemBuilder: (BuildContext context) {
-                return {
-                  'Contact',
-                }.map((String choice) {
+                return {'Contact', 'Logout'}.map((String choice) {
                   return PopupMenuItem<String>(
                     value: choice,
                     child: Text(choice),
@@ -129,5 +126,20 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+void handleAppbarClick(String value, BuildContext context) {
+  switch (value) {
+    case 'Logout':
+      BlocProvider.of<AuthenticationBloc>(context).add(SignOut());
+      break;
+    case 'Contact':
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const ContactScreen(),
+        ),
+      );
+      break;
   }
 }

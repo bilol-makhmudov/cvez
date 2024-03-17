@@ -29,6 +29,23 @@ class AuthenticationBloc
       emit(AuthenticationLoadingState(isLoading: false));
     });
 
+    on<SignInUser>((event, emit) async {
+      emit(AuthenticationLoadingState(isLoading: true));
+      try {
+        final UserModel? user =
+            await authService.signInUser(event.email, event.password);
+        if (user != null) {
+          emit(AuthenticationSuccessState(user));
+        } else {
+          emit(const AuthenticationFailureState('Sign in failed'));
+        }
+      } catch (e) {
+        emit(AuthenticationFailureState(e.toString()));
+        print(e.toString());
+      }
+      emit(AuthenticationLoadingState(isLoading: false));
+    });
+
     on<SignOut>((event, emit) async {
       emit(AuthenticationLoadingState(isLoading: true));
       try {

@@ -1,5 +1,6 @@
 import 'package:cv_ez/src/blocs/AuthenticationBloc/authentication_bloc.dart';
 import 'package:cv_ez/src/blocs/bloc_barrel.dart';
+import 'package:cv_ez/src/services/routeSettings.dart';
 import 'package:cv_ez/src/views/AuthScreens/AuthenticationFlowScreen.dart';
 import 'package:cv_ez/src/views/fillingScreen/FillingScreen.dart';
 import 'package:cv_ez/src/views/homeScreen/HomeScreen.dart';
@@ -44,16 +45,7 @@ class MyApp extends StatelessWidget {
           focusColor: Colors.transparent,
         ),
         debugShowCheckedModeBanner: false,
-        onGenerateRoute: (RouteSettings settings) {
-          if (settings.name == HomeScreen.routeName) {
-            return MaterialPageRoute(builder: (context) => HomeScreen());
-          } else if (settings.name == FillingScreen.routeName) {
-            return MaterialPageRoute(builder: (context) => FillingScreen());
-          } else if (settings.name == TemplateScreen.routeName) {
-            return MaterialPageRoute(builder: (context) => TemplateScreen());
-          }
-          return null;
-        },
+        onGenerateRoute: (RouteSettings settings) => routeSettings(settings),
         supportedLocales: const [
           Locale('en', ''),
           Locale('uz', ''),
