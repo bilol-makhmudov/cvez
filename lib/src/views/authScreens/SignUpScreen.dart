@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/AuthenticationBloc/authentication_bloc.dart';
-import '../homeScreen/HomeScreen.dart';
 
-class SignupScreen extends StatefulWidget {
-  static String id = 'login_screen';
-
-  const SignupScreen({
+class SignUpScreen extends StatefulWidget {
+  SignUpScreen({
     Key? key,
   }) : super(key: key);
-
+  static const String routeName = "/signUpScreen";
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   // Text Controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -124,7 +121,9 @@ class _SignupScreenState extends State<SignupScreen> {
               children: [
                 const Text("Already have an account? "),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, "/signInScreen");
+                  },
                   child: const Text(
                     'Login',
                     style: TextStyle(

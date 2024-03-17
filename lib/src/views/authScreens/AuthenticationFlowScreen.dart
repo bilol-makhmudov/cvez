@@ -1,8 +1,8 @@
-import 'package:cv_ez/src/views/AuthScreens/SignUpScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../homeScreen/HomeScreen.dart';
+import 'SignUpScreen.dart';
 
 class AuthenticationFlowScreen extends StatelessWidget {
   const AuthenticationFlowScreen({super.key});
@@ -16,7 +16,7 @@ class AuthenticationFlowScreen extends StatelessWidget {
           if (snapshot.hasData) {
             return HomeScreen();
           } else {
-            return SignupScreen();
+            return SignUpScreen();
           }
         },
       ),
