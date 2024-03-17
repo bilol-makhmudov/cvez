@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../models/Auth/User.dart';
 import '../../services/authentication.dart';
@@ -17,7 +18,7 @@ class AuthenticationBloc
       emit(AuthenticationLoadingState(isLoading: true));
       try {
         final UserModel? user =
-            await authService.signUpUser(event.email, event.password);
+            await authService.signUpUser(event.userModel);
         if (user != null) {
           emit(AuthenticationSuccessState(user));
         } else {
@@ -33,7 +34,7 @@ class AuthenticationBloc
       emit(AuthenticationLoadingState(isLoading: true));
       try {
         final UserModel? user =
-            await authService.signInUser(event.email, event.password);
+            await authService.signInUser(event.userModel);
         if (user != null) {
           emit(AuthenticationSuccessState(user));
         } else {
@@ -41,6 +42,22 @@ class AuthenticationBloc
         }
       } catch (e) {
         emit(AuthenticationFailureState(e.toString()));
+        print(e.toString());
+      }
+      emit(AuthenticationLoadingState(isLoading: false));
+    });
+
+    on<RegisterUserToDB>((event, emit) async {
+      emit(AuthenticationLoadingState(isLoading: true));
+      try{
+         final UserModel? user =
+         await authService.registerUserRTDB(event.userModel);
+         if (user != null) {
+           emit(AuthenticationSuccessState(user));
+         } else {
+           emit(const AuthenticationFailureState('Register user failed'));
+         }
+      }catch(e) {
         print(e.toString());
       }
       emit(AuthenticationLoadingState(isLoading: false));

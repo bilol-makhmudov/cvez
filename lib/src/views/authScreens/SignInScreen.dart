@@ -1,3 +1,4 @@
+import 'package:cv_ez/src/models/Auth/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/AuthenticationBloc/authentication_bloc.dart';
@@ -81,10 +82,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
+                      UserModel userModel = UserModel(email: emailController.text.trim(),password: passwordController.text.trim());
                       BlocProvider.of<AuthenticationBloc>(context).add(
                         SignInUser(
-                          emailController.text.trim(),
-                          passwordController.text.trim(),
+                          userModel
                         ),
                       );
                     },
