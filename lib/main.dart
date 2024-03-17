@@ -1,5 +1,6 @@
 import 'package:cv_ez/src/blocs/AuthenticationBloc/authentication_bloc.dart';
 import 'package:cv_ez/src/blocs/bloc_barrel.dart';
+import 'package:cv_ez/src/services/firebaseMessagingService.dart';
 import 'package:cv_ez/src/services/routeSettings.dart';
 import 'package:cv_ez/src/views/AuthScreens/AuthenticationFlowScreen.dart';
 import 'package:cv_ez/src/views/fillingScreen/FillingScreen.dart';
@@ -14,6 +15,7 @@ import 'firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseMessagingService().initialize();
 
   runApp(MultiBlocProvider(providers: [
     BlocProvider<AuthenticationBloc>(create: (context) => AuthenticationBloc()),
