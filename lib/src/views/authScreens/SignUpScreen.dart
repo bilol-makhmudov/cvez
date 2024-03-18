@@ -1,3 +1,4 @@
+import 'package:cv_ez/src/models/Auth/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,6 +17,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // Text Controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final fullNameController = TextEditingController();
 
   @override
   void dispose() {
@@ -41,6 +43,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 20),
+            const Text('Full Name'),
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: fullNameController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter your full name',
+              ),
+            ),
             const SizedBox(height: 20),
             const Text('Email address'),
             const SizedBox(height: 10),
@@ -96,10 +108,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
+                      UserModel userModel = UserModel(displayName: fullNameController.text.trim(),email: emailController.text.trim(),password: passwordController.text.trim());
                       BlocProvider.of<AuthenticationBloc>(context).add(
                         SignUpUser(
-                          emailController.text.trim(),
-                          passwordController.text.trim(),
+                          userModel
                         ),
                       );
                     },

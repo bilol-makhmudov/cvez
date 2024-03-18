@@ -7,23 +7,30 @@ abstract class AuthenticationEvent {
 }
 
 class SignUpUser extends AuthenticationEvent {
-  final String email;
-  final String password;
+  UserModel userModel = UserModel();
 
-  const SignUpUser(this.email, this.password);
+  SignUpUser(this.userModel);
 
   @override
-  List<Object> get props => [email, password];
+  List<Object> get props => [userModel];
 }
 
 class SignInUser extends AuthenticationEvent {
-  final String email;
-  final String password;
+  UserModel userModel = UserModel();
 
-  const SignInUser(this.email, this.password);
+  SignInUser(this.userModel);
 
   @override
-  List<Object> get props => [email, password];
+  List<Object> get props => [userModel];
+}
+
+class RegisterUserToDB extends AuthenticationEvent {
+  UserModel userModel = UserModel();
+
+  RegisterUserToDB(this.userModel);
+
+  @override
+  List<Object> get props => [userModel];
 }
 
 class SignOut extends AuthenticationEvent {}
