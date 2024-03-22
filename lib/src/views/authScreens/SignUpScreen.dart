@@ -40,112 +40,118 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
-            const Text('Full Name'),
-            const SizedBox(height: 10),
-            TextFormField(
-              controller: fullNameController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter your full name',
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text('Email address'),
-            const SizedBox(height: 10),
-            TextFormField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter your email',
-              ),
-            ),
-            const SizedBox(height: 10),
-            const Text('Password'),
-            TextFormField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter your password',
-              ),
-              obscureText: false,
-            ),
-            const SizedBox(height: 10),
-            GestureDetector(
-              onTap: () {},
-              child: const Text(
-                'Forgot password?',
-                style: TextStyle(
-                  color: Colors.deepPurple,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            BlocConsumer<AuthenticationBloc, AuthenticationState>(
-              listener: (context, state) {
-                if (state is AuthenticationSuccessState) {
-                  // Navigator.pushNamedAndRemoveUntil(
-                  //   context,
-                  //   HomeScreen.id,
-                  //       (route) => false,
-                  // );
-                } else if (state is AuthenticationFailureState) {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return const AlertDialog(
-                          content: Text('error'),
-                        );
-                      });
-                }
-              },
-              builder: (context, state) {
-                return SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      UserModel userModel = UserModel(displayName: fullNameController.text.trim(),email: emailController.text.trim(),password: passwordController.text.trim());
-                      BlocProvider.of<AuthenticationBloc>(context).add(
-                        SignUpUser(
-                          userModel
-                        ),
-                      );
-                    },
-                    child: Text(
-                      state is AuthenticationLoadingState
-                          ? '.......'
-                          : 'Signup',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+        child: Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Already have an account? "),
+                const SizedBox(height: 20),
+                const Text('Full Name'),
+                const SizedBox(height: 10),
+                TextFormField(
+                  controller: fullNameController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter your full name',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text('Email address'),
+                const SizedBox(height: 10),
+                TextFormField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter your email',
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Text('Password'),
+                TextFormField(
+                  controller: passwordController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter your password',
+                  ),
+                  obscureText: false,
+                ),
+                const SizedBox(height: 10),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, "/signInScreen");
-                  },
+                  onTap: () {},
                   child: const Text(
-                    'Login',
+                    'Forgot password?',
                     style: TextStyle(
                       color: Colors.deepPurple,
                     ),
                   ),
-                )
+                ),
+                const SizedBox(height: 20),
+                BlocConsumer<AuthenticationBloc, AuthenticationState>(
+                  listener: (context, state) {
+                    if (state is AuthenticationSuccessState) {
+                      // Navigator.pushNamedAndRemoveUntil(
+                      //   context,
+                      //   HomeScreen.id,
+                      //       (route) => false,
+                      // );
+                    } else if (state is AuthenticationFailureState) {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const AlertDialog(
+                              content: Text('error'),
+                            );
+                          });
+                    }
+                  },
+                  builder: (context, state) {
+                    return SizedBox(
+                      height: 50,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          UserModel userModel = UserModel(
+                              displayName: fullNameController.text.trim(),
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim());
+                          BlocProvider.of<AuthenticationBloc>(context).add(
+                            SignUpUser(userModel),
+                          );
+                        },
+                        child: Text(
+                          'Signup',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Already have an account? "),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, "/signInScreen");
+                      },
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(
+                          color: Colors.deepPurple,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

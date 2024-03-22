@@ -25,3 +25,19 @@ Future<void> savePdfFile(Uint8List pdfBytes, PersonalInfoBloc personalInfoBloc,
     onFileSaved();
   }
 }
+
+Future<void> saveSamplePdfFile(Uint8List pdfBytes, BuildContext context) async {
+  final tempDir = await getTemporaryDirectory();
+  final tempPath = tempDir.path;
+
+  final file = File('$tempPath/${"sample"}.pdf');
+  await file.writeAsBytes(pdfBytes);
+
+  final params = SaveFileDialogParams(sourceFilePath: file.path);
+  final filePath = await FlutterFileDialog.saveFile(params: params);
+
+  if (filePath != null && filePath.isNotEmpty) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(showCustomSnackBar("File has been saved"));
+  }
+}

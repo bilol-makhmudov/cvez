@@ -51,6 +51,7 @@ dependencies:
   firebase_auth: ^4.17.9
   firebase_database: ^10.4.10
   firebase_messaging: ^14.7.20
+  flutter_to_pdf: ^0.1.1
 
 dev_dependencies:
   flutter_test:

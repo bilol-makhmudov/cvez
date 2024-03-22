@@ -38,86 +38,88 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
-            const Text('Email address'),
-            const SizedBox(height: 10),
-            TextFormField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter your email',
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              const Text('Email address'),
+              const SizedBox(height: 10),
+              TextFormField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter your email',
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            const Text('Password'),
-            TextFormField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter your password',
+              const SizedBox(height: 10),
+              const Text('Password'),
+              TextFormField(
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter your password',
+                ),
+                obscureText: false,
               ),
-              obscureText: false,
-            ),
-            const SizedBox(height: 20),
-            BlocConsumer<AuthenticationBloc, AuthenticationState>(
-              listener: (context, state) {
-                if (state is AuthenticationSuccessState) {
-                  Navigator.pushNamed(context, '/homeScreen');
-                } else if (state is AuthenticationFailureState) {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return const AlertDialog(
-                          content: Text('error'),
+              const SizedBox(height: 20),
+              BlocConsumer<AuthenticationBloc, AuthenticationState>(
+                listener: (context, state) {
+                  if (state is AuthenticationSuccessState) {
+                    Navigator.pushNamed(context, '/homeScreen');
+                  } else if (state is AuthenticationFailureState) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const AlertDialog(
+                            content: Text('error'),
+                          );
+                        });
+                  }
+                },
+                builder: (context, state) {
+                  return SizedBox(
+                    height: 50,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        UserModel userModel = UserModel(
+                            email: emailController.text.trim(),
+                            password: passwordController.text.trim());
+                        BlocProvider.of<AuthenticationBloc>(context).add(
+                          SignInUser(userModel),
                         );
-                      });
-                }
-              },
-              builder: (context, state) {
-                return SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      UserModel userModel = UserModel(email: emailController.text.trim(),password: passwordController.text.trim());
-                      BlocProvider.of<AuthenticationBloc>(context).add(
-                        SignInUser(
-                          userModel
+                      },
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(
+                          fontSize: 20,
                         ),
-                      );
-                    },
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(
-                        fontSize: 20,
                       ),
                     ),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("New to CV-ez? "),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, "/signUpScreen");
-                  },
-                  child: const Text(
-                    'Sign up',
-                    style: TextStyle(
-                      color: Colors.deepPurple,
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("New to CV-ez? "),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, "/signUpScreen");
+                    },
+                    child: const Text(
+                      'Sign up',
+                      style: TextStyle(
+                        color: Colors.deepPurple,
+                      ),
                     ),
-                  ),
-                )
-              ],
-            ),
-          ],
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

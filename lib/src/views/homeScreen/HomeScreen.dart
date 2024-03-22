@@ -1,3 +1,4 @@
+import 'package:cv_ez/src/plugin_test.dart';
 import 'package:cv_ez/src/views/contactScreen/ContactScreen.dart';
 import 'package:cv_ez/src/views/homeScreen/comingSoonTemplate/ComingSoonTemplate.dart';
 import 'package:flutter/material.dart';
@@ -115,7 +116,9 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.green,
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/templateScreen');
+                        // Navigator.pushNamed(context, '/templateScreen');
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => Demo()));
                       },
                     ),
                   )
