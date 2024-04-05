@@ -1,14 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../models/Auth/User.dart';
 import '../../services/authentication.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
-class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
+class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final AuthService authService = AuthService();
 
   AuthenticationBloc() : super(AuthenticationInitialState()) {

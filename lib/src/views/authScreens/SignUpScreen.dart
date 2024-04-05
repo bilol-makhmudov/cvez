@@ -1,13 +1,10 @@
 import 'package:cv_ez/src/models/Auth/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../blocs/AuthenticationBloc/authentication_bloc.dart';
 
 class SignUpScreen extends StatefulWidget {
-  SignUpScreen({
-    Key? key,
-  }) : super(key: key);
+  const SignUpScreen({super.key,});
   static const String routeName = "/signUpScreen";
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -130,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       state is AuthenticationLoadingState
                           ? '.......'
                           : 'Signup',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                       ),
                     ),

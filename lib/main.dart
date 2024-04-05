@@ -3,9 +3,6 @@ import 'package:cv_ez/src/blocs/bloc_barrel.dart';
 import 'package:cv_ez/src/services/firebaseMessagingService.dart';
 import 'package:cv_ez/src/services/routeSettings.dart';
 import 'package:cv_ez/src/views/AuthScreens/AuthenticationFlowScreen.dart';
-import 'package:cv_ez/src/views/fillingScreen/FillingScreen.dart';
-import 'package:cv_ez/src/views/homeScreen/HomeScreen.dart';
-import 'package:cv_ez/src/views/templateScreen/TemplateScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -32,6 +29,7 @@ Future<void> main() async {
       create: (context) => EducationBloc(),
     ),
     BlocProvider<SkillBloc>(create: (context) => SkillBloc()),
+    BlocProvider<TemplatesBloc>(create: (context) => TemplatesBloc()),
   ], child: const MyApp()));
 }
 

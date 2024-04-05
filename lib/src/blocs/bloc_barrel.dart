@@ -20,3 +20,7 @@ export 'SkillBloc/skill_state.dart';
 export 'FillingScreenBloc/filling_screen_bloc.dart';
 export 'FillingScreenBloc/filling_screen_event.dart';
 export 'FillingScreenBloc/filling_screen_state.dart';
+
+export 'TemplatesBloc/templates_bloc.dart';
+export 'TemplatesBloc/templates_event.dart';
+export 'TemplatesBloc/templates_state.dart';

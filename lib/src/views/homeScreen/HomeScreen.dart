@@ -1,17 +1,19 @@
+import 'package:cv_ez/src/testDirectory/UploadTemplates.dart';
 import 'package:cv_ez/src/views/contactScreen/ContactScreen.dart';
-import 'package:cv_ez/src/views/homeScreen/comingSoonTemplate/ComingSoonTemplate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/AuthenticationBloc/authentication_bloc.dart';
 
+
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   static const String routeName = "/homeScreen";
-
+  //final imageUploader = ImageUploader();
   ScrollController templateScrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
+    //imageUploader.uploadImagesToFirebaseStorage();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

@@ -4,9 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/AuthenticationBloc/authentication_bloc.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({
-    Key? key,
-  }) : super(key: key);
+  const SignInScreen({super.key,});
   static const String routeName = "/signInScreen";
 
   @override
