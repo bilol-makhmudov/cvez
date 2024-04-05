@@ -59,13 +59,17 @@ class _SignInScreenState extends State<SignInScreen> {
                 border: OutlineInputBorder(),
                 hintText: 'Enter your password',
               ),
-              obscureText: false,
+              obscureText: true,
             ),
             const SizedBox(height: 20),
             BlocConsumer<AuthenticationBloc, AuthenticationState>(
               listener: (context, state) {
                 if (state is AuthenticationSuccessState) {
-                  Navigator.pushNamed(context, '/homeScreen');
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    '/homeScreen',
+                        (route) => false,
+                  );
                 } else if (state is AuthenticationFailureState) {
                   showDialog(
                       context: context,

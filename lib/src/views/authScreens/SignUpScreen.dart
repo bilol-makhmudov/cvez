@@ -48,6 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(height: 10),
             TextFormField(
               controller: fullNameController,
+              maxLength: 30,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter your full name',
@@ -58,10 +59,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(height: 10),
             TextFormField(
               controller: emailController,
+              maxLength: 30,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter your email',
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please enter your email address';
+                }
+                if (!RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$").hasMatch(value)) {
+                  return 'Please enter a valid email address';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 10),
             const Text('Password'),
@@ -71,7 +82,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 border: OutlineInputBorder(),
                 hintText: 'Enter your password',
               ),
-              obscureText: false,
+              obscureText: true,
             ),
             const SizedBox(height: 10),
             GestureDetector(
@@ -87,11 +98,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             BlocConsumer<AuthenticationBloc, AuthenticationState>(
               listener: (context, state) {
                 if (state is AuthenticationSuccessState) {
-                  // Navigator.pushNamedAndRemoveUntil(
-                  //   context,
-                  //   HomeScreen.id,
-                  //       (route) => false,
-                  // );
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    '/homeScreen',
+                        (route) => false,
+                  );
                 } else if (state is AuthenticationFailureState) {
                   showDialog(
                       context: context,
