@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:cv_ez/src/blocs/bloc_barrel.dart';
-import 'package:cv_ez/src/views/homeScreen/comingSoonTemplate/ComingSoonTemplate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../blocs/TemplatesBloc/templates_bloc.dart';
+import '../../blocs/TemplatesBloc/templates_event.dart';
+import '../../blocs/TemplatesBloc/templates_state.dart';
+import '../../models/Template.dart';
+import '../homeScreen/comingSoonTemplate/ComingSoonTemplate.dart';
 
 class TemplateScreen extends StatelessWidget {
   const TemplateScreen({super.key});
+
   static const String routeName = "/templateScreen";
 
   @override
@@ -16,51 +21,65 @@ class TemplateScreen extends StatelessWidget {
         title: const Text("Templates", style: TextStyle(color: Colors.white)),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: BlocConsumer<TemplatesBloc, TemplatesState>(
-        listener: (context, state) {
-          if (state is TemplatesFailureState) {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  content: Text('Error: ${state.errorMessage}'),
-                );
-              },
-            );
-          }
-        },
-        builder: (context, state) {
-          if (state is TemplatesSuccessState) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: TemplatesGridView(templates: state.templates),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/fillingScreen');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                    ),
-                    child: const Text(
-                      "Create Resume",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+      body: BlocProvider(
+        create: (context) => TemplatesBloc()..add(const TakeTemplatesURL([])),
+        child: BlocBuilder<TemplatesBloc, TemplatesState>(
+          builder: (context, state) {
+            print(state);
+            return _buildUI(context, state);
+          },
+        ),
       ),
+    );
+  }
+
+  Widget _buildUI(BuildContext context, TemplatesState state) {
+    if (state is TemplatesIsLoading) {
+      return _buildLoadingUI();
+    } else if (state is TemplatesSuccessState) {
+      return _buildSuccessUI(context, state.templates);
+    } else if (state is TemplatesFailureState) {
+      return _buildFailureUI(state.errorMessage);
+    } else {
+      return _buildLoadingUI();
+    }
+  }
+
+  Widget _buildLoadingUI() {
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  Widget _buildSuccessUI(BuildContext context, List<Template> templates) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          child: TemplatesGridView(templates: templates),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/fillingScreen');
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+            ),
+            child: const Text(
+              "Create Resume",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFailureUI(String errorMessage) {
+    return Center(
+      child: Text('Error: $errorMessage'),
     );
   }
 }
