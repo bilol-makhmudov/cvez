@@ -49,15 +49,23 @@ class _TemplatesGridViewState extends State<TemplatesGridView> {
                 },
                 child: Stack(
                   children: [
-                    ColorFiltered(
-                      colorFilter: const ColorFilter.mode(Colors.black12, BlendMode.darken),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CachedNetworkImage(
-                          imageUrl: template.url,
-                          fit: BoxFit.scaleDown,
-                          width: itemWidth,
-                          height: itemWidth,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: itemWidth,
+                        height: itemWidth,
+                        child: Card(
+                          elevation: 10.0,
+                          color: const Color(0xff5D6D7E),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: template.url,
+                            fit: BoxFit.scaleDown,
+                            width: itemWidth,
+                            height: itemWidth,
+                          ),
                         ),
                       ),
                     ),
