@@ -135,6 +135,11 @@ void handleAppbarClick(String value, BuildContext context) {
   switch (value) {
     case 'Logout':
       BlocProvider.of<AuthenticationBloc>(context).add(SignOut());
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        '/signUpScreen',
+            (route) => false,
+      );
       break;
     case 'Contact':
       Navigator.of(context).push(
